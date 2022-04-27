@@ -13,17 +13,19 @@ Resumen:       El programa imprime los numeros primos dentro de un rengo dado .
 int n1, n2, i=2, mod, primo=1, a, count, conut2=0;
 
 int main(){
-    puts("Ingrese el número a entero menor");
+    // leer numero mas pequeño
+    puts("Ingrese el número entero menor");
     scanf("%d", &n1);
-    //1. leer el numero N
-    puts("Ingrese el número a verificar");
+    //1. leer el numero mas grande
+    puts("Ingrese el número entero mayor");
     scanf("%d", &n2);
     
-
+    // Creamos un clico para interar dentro del rango
     for (count=n1; count <= n2; count++)
     {
-        //Tomamos el entero menor que n
+        //Tomamos el entero menor que count
         a=count-1;
+        // Damos los valores iniciales para cada iteracion
         primo=1;
         i=2;
         //Verificamos las condicones para que la iteracion de validacion
@@ -31,7 +33,7 @@ int main(){
         {
             mod=count % i;
             
-            //vemos los modulos de todos los enteros entre 2 y n.
+            //vemos los modulos de todos los enteros entre 2 y count.
             if (mod==0)
             {
                 primo=0;
