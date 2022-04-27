@@ -19,6 +19,7 @@ int main(){
     //Lee muestro al usuario los valores de a y b
     printf("El valor de a es %f \n", a);
     printf("El valor de b es %f \n", b);
+    //Despejamos la ecuación
     printf("La proyeccion para el valor 30 esta dado por la ecuacion 30= %f x + %f\n", a,b);
     printf("Restando %f de ambos lados\n", b);
     aux1=30-b;
