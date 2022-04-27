@@ -17,3 +17,4 @@ set xrange [0:24]                                       # Defino el rango de x [
 set yrange [20:35]                                      # Defino el rango de y [20,30]
 set title "Precios del Combustible poyeccion de valor=30"# Renombro para la tercera grafica 
 replot g(x)                                             # Vuelvo a graficar aplicando la configuraciones y agregando g(x)
+replot "datos2" using 1:2
