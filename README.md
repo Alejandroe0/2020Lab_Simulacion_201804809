@@ -4,6 +4,6 @@ Este es el repositorio donde se subira parte de los proyectos y ejercicios del l
 
 ## Instalación
 Se necesita un compilador de C que corra en linux.
-'''bash
+```bash
 $ sudo apt-get inatll build-essential
-'''
+```
