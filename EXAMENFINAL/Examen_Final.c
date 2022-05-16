@@ -15,13 +15,12 @@ Resumen:       Ejemplo basico del metodo numerico de NewtonRaphson para 2+cos(e^
 //prototipos de funciones
 // Funcion para la simulacion
 float cohete1(float E0, float TSFC, float CD, float A, float m0, float mf0);
-// La derivada de la funcion
-float df(float x);
+
 
 //La funcion de Fa
-float fa(float x);
-// La derivada de la funcion de Fa
-float dfa(float x);
+float fa(float t, float CD, float A, float P, float Vant, float Aant);
+//La funcion de p(y)
+float py(float t, float P0, float R, float T0, float YT, float L, float g0);
 //El método Númerico
 void NewtonRaphson(float x0, float tol, int maxiter, int *actiter, float *sol);
 
@@ -81,25 +80,32 @@ void NewtonRaphson(float x0, float tol, int maxiter, int *actiter, float *sol)
 }
 
 // Se declara la funcion fa
-float fa(float x, float CD, float A, float P)
+float fa(float t, float CD, float A, float P, float Vant, float Aant)
 {
     
     float res = 0, aux1=0;
-    //Es mi variable del argumento del coseno
-    aux1 = (1/2)*P;
-    //La variable almacena La funcion original
-    res = 2 + cos(aux1)-exp(x);
+    //Es el argumento que tiene el valor de aceleracion
+    aux1=Vant+Aant*t;
+    //Es la ecuacion original
+    res = (1/2)*P*CD*A*(aux1)*fabs(aux1);
     return res;
 }
 
-// Se declara la primera derivada de la funcion fa
-float dfa(float x, float CD, float A, float P)
+
+
+
+// Se declara la funcion p(y)
+float py(float t, float P0, float R, float T0, float YT, float L, float g0)
 {
-    //Declarto las variables locales
-    float res = 0, aux1=0;
-    //Es mi variable del argumento del seno
-    aux1=2-exp(x);
-    ////La variable almacena La derivada de la funcion original
-    res = exp(x)*sin(aux1)-exp(x);
+    
+    float res = 0, aux1=0, aux2=0, aux3=0;
+    aux3 = L;
+    //Es la base de la potencia
+    aux1=(1-((aux3)/(T0));
+    //Es la exponente de la potencia
+    aux2=(g0/(R*L)); 
+    //Es la ecuacion original
+    res = (1/2)*(P0/(R*T0))*pow(aux1,aux2);
     return res;
 }
+
