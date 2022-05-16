@@ -28,7 +28,7 @@ void main (void)
 {
     //definir variables
     float G, Rt, Mt, R, L, g0, T0, P0;
-    float E0, TSFC, CD, A, m0, mf0,Y0,h,denaire,masacomb,V,P,Acele,mf,g;
+    float E0, TSFC, CD, A, m0, mf0,Y0,h,denaire,masacomb,V,P,Acele,mf,g,tini,tagota,hmax;
     float masa;
     int iteraciones, Aiteracion;
     
@@ -51,12 +51,20 @@ void main (void)
     mf0=1.5*pow(10,6);
     Y0=0.09;
 
+    //Seteo las condiciones iniciales
     V=0;
+    tini=0;
     h=Y0;
     Acele=0;
     masa=dfmf(0, E0, TSFC, mf0);
     masacomb=dfmf(0, E0, TSFC, mf0);
-    for (int t = 0; masa <= 0; t=+0.1)
+
+    //Genero el archivo de datos
+    FILE *pf = fopen("Datos","wt");
+    //Imprimo la primera fila de datos
+    fprintf(pf,"%.2f\t%.2f\t%.2f\n",tini,h,V);
+
+    for (float t = 0; h <= 0; t=t+0.1)
     {
         if (h<(T0/L) && masacomb>0)
         {
@@ -75,23 +83,28 @@ void main (void)
             P=py(P0, R, T0, h, L, g0);
             mf=dfmf(t, 0, TSFC, mf0);
             Acele=(0-fa(CD, A, P, V)-mc(m0, mf)*gy(G, Mt, Rt, h))/mc(m0, mf);
+            tagota=t;
 
         }else if (h>=(T0/L) && masacomb<=0)
         {
             P=0;
             mf=dfmf(t, 0, TSFC, mf0);
             Acele=(0-fa(CD, A, P, V)-mc(m0, mf)*gy(G, Mt, Rt, h))/mc(m0, mf);
+            //Verifico la altura maxima
+            if (V==0)
+            {
+                hmax=h;
+            }
+            
         }
-
-        FILE *pf = fopen("Datos","wt");
-        
         
 
-
+        //Se incrementa en el metodo numerico 
         V=V+Acele*t;
         h=h+V*t+0.5*Acele*t*t;
-        
-        
+        printf("la altura es %f",t);
+        //Imprimo la segunda fila de datos
+        fprintf(pf,"%.2f\t%.2f\t%.2f\n",t,h,V);
     }
     
 
