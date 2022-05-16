@@ -63,7 +63,7 @@ void main (void)
     FILE *pf = fopen("Datos","wt");
     //Imprimo la primera fila de datos
     fprintf(pf,"%.2f\t%.2f\t%.2f\n",tini,h,V);
-
+    
     for (float t = 0; h <= 0; t=t+0.1)
     {
         if (h<(T0/L) && masacomb>0)
