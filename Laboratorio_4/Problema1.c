@@ -14,11 +14,14 @@ Resumen:       Se ordenara una lista de 10 numeros pares
 #include <math.h>
 
 
-void main (void)
-{
-    //definir variables
+//definir variables
     int data[10]={2,20,4,18,6,16,8,14,10,12};
     int val=0, val1;
+
+
+void main (void)
+{
+    
     
 
     while (val==0)
