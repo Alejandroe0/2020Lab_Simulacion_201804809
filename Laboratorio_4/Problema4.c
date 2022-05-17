@@ -2,98 +2,196 @@
 Autor:         Alejandro Barillas, inspirado por Maynor Ballina
 Fecha:         Mon May 16 18:39:41 CST 2022
 compilador:    gcc (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0
-Compilar:      gcc -o Problema2.out Problema2.c -lm
+Compilar:      gcc -o Problema4.out Problema4.c -lm
 Librerias:     stdio, stdlib, math
-Resumen:       Se ordenara una lista de 10 numeros pares
+Resumen:       Se realizan operaciones con matrices
 */
 
 //librerias
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <math.h>
 
+
 //Declaro la variable del vector 
-float vec1[3];
-float vec2[3];
-float res[3];
-float ina1, ina2, inb, inc, ind;
+float matA[3][3];
+float matB[3][3];
+float res[3][3];
+float inter=0;
+float ina1, ina2, inb, inc, ind, c1, determinanteA;
 
 
-//Prototipado de funciones
-//Funcion de magnitud
-float mag(float vec[3]);
 
-
-void main(void){
-    //1. For para almacenar la primera posicion
+int main(){
+    //1. For para almacenar la primera matriz
     for (int i = 0; i < 3; i++)
     {
-        //Pido el vector 1
-        printf("ingresar la cordenada %d del primer vector\n",(i+1));
-        scanf("%f", &vec1[i]);
+        for (int j = 0; j < 3; j++)
+        {
+            //Pido la matriz 1
+            printf("ingresar la fila %d columna %d de la primera matriz\n",(i+1),(j+1));
+            scanf("%f", &matA[i][j]);
+        }
+        
     }
 
-    //1. For para almacenar la segunda posicion
+    //1. For para almacenar la segunda matriz
     for (int i = 0; i < 3; i++)
     {
-        //Pido el vector 2
-        printf("ingresar la cordenada %d del segundo vector\n",(i+1));
-        scanf("%f", &vec2[i]);
+        for (int j = 0; j < 3; j++)
+        {
+            //Pido la matriz b
+            printf("ingresar la fila %d columna %d de la segunda matriz\n",(i+1),(j+1));
+            scanf("%f", &matB[i][j]);
+        }
+        
+    }
+
+    //Leo lka constante que proporciona el usuario
+    printf("ingrese el valor de una constante");
+    scanf("%f", &c1);
+
+    //--------------------------------------------------------------------------------------------------
+    //Multiplicacion por escalar
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            //Asigno el valor correcto a la matriz de resultado
+            res[i][j]=matA[i][j]*c1;
+        }    
+    }
+
+
+    //Imprimo la matriz resultado
+    printf("La multiplicacion de la matriz A por %f es \n", c1);
+    puts("\n");
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%f ", res[i][j]);
+        }
+        puts("\n");
     }
     
-    //Mmuestro las magnitudes
-    printf("La magnitud del primer vector es %f\n",mag(vec1));
-    printf("La magnitud del segundo vector es %f\n",mag(vec2));
-    puts("\n");
 
-    //Suma de vectrores
-    printf("La suma de vectores es ");
+    //-------------------------------------------------------------------------------
+    //Suma de matrices 
     for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
         {
-            //Variable para cada cordenada
-            float aux;
-            aux=vec1[i]+vec2[i];
-            /* Imprimo el vector ordenado  */
-            printf("%f ", aux);
-        }
+            //Asigno el valor correcto a la matriz de resultado
+            res[i][j]=matA[i][j]+matB[i][j];
+        }    
+    }
+
+    //Imprimo la matriz resultado
+    printf("La suma de matrices es \n");
     puts("\n");
-
-
-    //Producto escalar
-    printf("El producto escalar es ");
     for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
         {
-            //Sumo el producto de coordenadas
-            inc=inc+vec1[i]*vec2[i];
+            printf("%f ", res[i][j]);
         }
-    //Imprimo el resultado
-    printf("%f ", inc);
+        puts("\n");
+    }
+
+
+
+    //-------------------------------------------------------------------------------
+    //Resta de matrices 
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            //Asigno el valor correcto a la matriz de resultado
+            res[i][j]=matA[i][j]-matB[i][j];
+        }    
+    }
+
+    //Imprimo la matriz resultado
+    printf("La resta de matrices es \n");
+    puts("\n");
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%f ", res[i][j]);
+        }
+        puts("\n");
+    }
+
+
+
+
+    //-------------------------------------------------------------------------------
+    //Multiplicacion de matrices 
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                inter=inter+matA[i][k]*matB[k][j];
+            }
+            res[i][j]=inter;
+            inter=0;
+        }    
+    }
+
+    //Imprimo la matriz resultado
+    printf("La multiplicacion de matrices es \n");
+    puts("\n");
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%f ", res[i][j]);
+        }
+        puts("\n");
+    }
+
+
+    //-------------------------------------------------------------------------------
+    //Determinante de matriz A
+    inter=0;
+    inter=matA[0][0]*(matA[1][1]*matA[2][2]-matA[1][2]*matA[2][1]);
+    inter=inter-matA[0][1]*(matA[1][0]*matA[2][2]-matA[1][2]*matA[2][0]);
+    determinanteA=inter+matA[0][2]*(matA[1][0]*matA[2][1]-matA[1][1]*matA[2][0]);
+    //Imprimo el determinante
+    printf("El determinante de la matriz A es %f \n", determinanteA);
     puts("\n");
 
-    
-    //Producto vectorial
-    printf("El producto escalar es ");
-    //Calculamos cada coordenada
-    float aux1, aux2, aux3;
-    aux1=vec1[1]*vec2[2]-vec1[2]*vec2[1];
-    aux2=vec1[0]*vec2[2]-vec1[2]*vec2[0];
-    aux3=vec1[0]*vec2[1]-vec1[1]*vec2[0];
-    /* Imprimo el vector ordenado  */
-    printf("%f %f %f", aux1, -aux2, aux3);
+
+
+    //-------------------------------------------------------------------------------
+    //Transpuesta de una matriz 
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            //Cambio los indices
+            res[j][i]=matB[i][j];
+        }    
+    }
+
+    //Imprimo la matriz resultado
+    printf("La la transpuesta de B es \n");
     puts("\n");
-   
-}
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%f ", res[i][j]);
+        }
+        puts("\n");
+    }
 
 
-// Funcion magnitud
-float mag(float vec[3])
-{
-    
-    float res = 0, aux1=0;
-    //Es el argumento que tiene el valor de la raiz
-    aux1=vec[0]*vec[0]+vec[1]*vec[1]+vec[2]*vec[2];
-    //Calculo la magnitud
-    res = sqrt(aux1);
-    return res;
+
+
+    return 0;
 }
