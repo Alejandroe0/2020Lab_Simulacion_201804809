@@ -12,6 +12,7 @@ Resumen:       El programa realizara la media aritmetica de los numeros ingresad
 //declaracion e inicializacion de variables
 int x=0, n=0, max=0, min=0;
 float med=0;
+char letra;
 
 int main(){
     //1. leer los datos ingresados
