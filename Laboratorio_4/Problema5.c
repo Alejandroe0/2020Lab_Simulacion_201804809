@@ -14,7 +14,7 @@ Resumen:       Factorial de un numero con recursividad
 // declara el método antes de usarlo para evitar errores: tipos en conflicto para 'factorial'
 float factorial(int);
 
-// Ejemplo de uso:
+
 int main()
 {
     int fact;

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "Problema4.C": "cpp"
+        "Problema4.C": "cpp",
+        "stdio.h": "c"
     }
 }
